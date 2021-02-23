@@ -16,27 +16,24 @@ export default class HousesController {
 
     createHouse(event) {
         event.preventDefault()
-        console.log("create house")
         let form = event.target
         let rawHouse = {
-                type: form.type.value,
-                address: form.address.value,
-                city: form.city.value,
+                bedrooms: form.bedrooms.value,
+                bathrooms: form.bathrooms.value,
+                levels: form.levels.value,
                 price: parseInt(form.price.value),
                 description: form.description.value,
                 imgUrl: form.imgUrl.value,
-                zip: form.zip.value
+                year: form.year.value
         }
         housesService.createHouse(rawHouse)
     }
 
     bid(id) {
-        console.log("bidding on " + id)
         housesService.bid(id)
     }
 
     deleteHouse(id) {
-        console.log("deleted " + id)
         housesService.deleteHouse(id)
     }
 }

@@ -16,7 +16,6 @@ export default class CarsController {
 
     createCar(event) {
         event.preventDefault()
-        console.log("create car")
         let form = event.target
         let rawCar = {
                 make: form.make.value,
@@ -31,12 +30,10 @@ export default class CarsController {
     }
 
     bid(id) {
-        console.log("bidding on " + id)
         carsService.bid(id)
     }
 
     deleteCar(id) {
-        console.log("deleted " + id)
         carsService.deleteCar(id)
     }
 }

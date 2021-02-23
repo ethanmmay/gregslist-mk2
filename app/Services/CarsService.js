@@ -1,6 +1,10 @@
-import { ProxyState } from "../AppState.js"
+import {
+    ProxyState
+} from "../AppState.js"
 import Car from "../Models/Car.js"
-import { api } from "../Services/AxiosService.js"
+import {
+    api
+} from "../Services/AxiosService.js"
 
 class CarsService {
     constructor() {
@@ -21,7 +25,8 @@ class CarsService {
     async getCars() {
         try {
             const res = await api.get('cars')
-            ProxyState.cars = [...ProxyState.cars, ...res.data.map(c => new Car(c))]
+            ProxyState.cars = res.data.map(c => new Car(c))
+            console.log(res.data)
         } catch (err) {
             console.error(err)
         }
@@ -31,24 +36,22 @@ class CarsService {
         try {
             let car = ProxyState.cars.find(c => c.id == id)
             car.price += 100
-            ProxyState.cars = ProxyState.cars
             const res = await api.put('cars/' + id, car)
             console.log(res.data)
+            this.getCars()
         } catch (err) {
             console.error(err)
         }
-        
+
     }
 
     async deleteCar(id) {
-        try {
-            const res = await api.delete(`cars/${id}`)
-            this.getCars()
-            console.log(res.data)
-        } catch (err) {
-            console.error(err)
-        }
+        const res = await api.delete('cars/' + id)
+        this.getCars()
+    } catch (err) {
+        console.error(err)
     }
 }
+
 
 export const carsService = new CarsService()

@@ -16,27 +16,22 @@ export default class JobsController {
 
     createJob(event) {
         event.preventDefault()
-        console.log("create job")
         let form = event.target
         let rawJob = {
-                title: form.title.value,
-                city: form.city.value,
-                tasks: form.tasks.value,
-                pay: parseInt(form.pay.value),
-                website: form.website.value,
-                imgUrl: form.imgUrl.value,
-                phone: form.phone.value
+                jobTitle: form.jobTitle.value,
+                company: form.company.value,
+                hours: form.hours.value,
+                rate: parseInt(form.rate.value),
+                description: form.description.value
         }
         jobsService.createJob(rawJob)
     }
 
     bid(id) {
-        console.log("bidding on " + id)
         jobsService.bid(id)
     }
 
     deleteJob(id) {
-        console.log("deleted " + id)
         jobsService.deleteJob(id)
     }
 }
